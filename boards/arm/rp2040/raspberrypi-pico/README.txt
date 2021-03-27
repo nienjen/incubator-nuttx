@@ -11,11 +11,16 @@ Currently only the following devices are suppored.
   - UART  (console port)
     - GPIO 0 (UART0 TX) and GPIO 1 (UART0 RX) are used for the console.
   - I2C
-  - SPI (DMA transfer is not supported yet)
+  - SPI
+  - DMAC
   - Flash ROM Boot
   - SRAM Boot
     - If Pico SDK is available, nuttx.uf2 file which can be used in
       BOOTSEL mode will be created.
+  - BMP180 sensor at I2C0 (don't forget to define I2C0 GPIOs at "I2C0 GPIO pin assign" in Board Selection menu)
+  - INA219 sensor / module (don't forget to define I2C0 GPIOs at "I2C0 GPIO pin assign" in Board Selection menu)
+  - Pico Display Pack (ST7789 LCD)
+    - RGB leds and buttons are not supported yet.
 
   Not supported:
   - All other devices
@@ -82,6 +87,27 @@ Defconfigs
        DAT0/DO ----- GP16 (SPI0 RX)  (Pin 21)
        DAT1          (NC)
     * Card hot swapping is not supported.
+
+- enc28j60
+    ENC28J60 SPI ethernet controller support
+      - IP address is configured by DHCP.
+      - DNS address is 8.8.8.8 (CONFIG_NETINIT_DNSIPADDR)
+      - NTP client is enabled.
+    Connection:
+      ENC28J60       Raspberry Pi Pico
+           GND ----- GND             (Pin 3 or 38 or ...)
+           3.3 ----- 3V3 OUT         (Pin 36)
+            SI ----- GP15 (SPI1 TX)  (Pin 20)
+           SCK ----- GP14 (SPI1 SCK) (Pin 19)
+            CS ----- GP13 (SPI1 CSn) (Pin 17)
+            SO ----- GP12 (SPI1 RX)  (Pin 16)
+           INT ----- GP11            (Pin 15)
+         RESET ----- GP10            (Pin 14)
+
+- displaypack
+    Pico Display Pack support
+    See the following page for connection:
+      https://shop.pimoroni.com/products/pico-display-pack
 
 License exceptions
 ==================

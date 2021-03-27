@@ -1,5 +1,5 @@
 /****************************************************************************
- *  arch/arm/src/armv7-a/arm_syscall.c
+ * arch/arm/src/armv7-a/arm_syscall.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -98,7 +98,7 @@ static void dispatch_syscall(void)
     " add sp, sp, #16\n"           /* Destroy the stack frame */
     " mov r2, r0\n"                /* R2=Save return value in R2 */
     " mov r0, #0\n"                /* R0=SYS_syscall_return */
-    " svc #0x900001\n"             /* Return from the SYSCALL */
+    " svc %0\n"::"i"(SYS_syscall)  /* Return from the SYSCALL */
   );
 }
 #endif

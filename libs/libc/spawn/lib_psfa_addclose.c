@@ -1,5 +1,5 @@
 /****************************************************************************
- * libs/libc/string/lib_psfa_addclose.c
+ * libs/libc/spawn/lib_psfa_addclose.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -64,7 +64,7 @@ int posix_spawn_file_actions_addclose(
 {
   FAR struct spawn_close_file_action_s *entry;
 
-  DEBUGASSERT(file_actions && fd >= 0 && fd < CONFIG_NFILE_DESCRIPTORS);
+  DEBUGASSERT(file_actions && fd >= 0);
 
   /* Allocate the action list entry */
 

@@ -1,5 +1,5 @@
 ############################################################################
-# boards/arm/stm32/stm32f4discovery/src/Makefile
+# boards/arm/stm32/stm32f4discovery/src/Make.defs
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -173,6 +173,10 @@ endif
 
 ifeq ($(CONFIG_WL_GS2200M),y)
 CSRCS += stm32_gs2200m.c
+endif
+
+ifeq ($(CONFIG_LCD_ST7789),y)
+CSRCS += stm32_st7789.c
 endif
 
 DEPPATH += --dep-path board

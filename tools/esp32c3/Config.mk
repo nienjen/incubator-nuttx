@@ -52,13 +52,12 @@ else ifeq ($(CONFIG_ESP32C3_FLASH_FREQ_20M),y)
 	FLASH_FREQ := 20m
 endif
 
-ESPTOOL_FLASH_OPTS := -fs $(FLASH_SIZE) -fm $(FLASH_MODE) -ff $(FLASH_FREQ)
-ESPTOOL_ELF2IMG_OPTS := $(ESPTOOL_FLASH_OPTS)
+ESPTOOL_ELF2IMG_OPTS := -fs $(FLASH_SIZE) -fm $(FLASH_MODE) -ff $(FLASH_FREQ)
 
 ifeq ($(CONFIG_ESP32C3_FLASH_DETECT),y)
-	ESPTOOL_WRITEFLASH_OPTS := -fs detect -fm $(FLASH_MODE) -ff $(FLASH_FREQ)
+	ESPTOOL_WRITEFLASH_OPTS := -fs detect -fm dio -ff $(FLASH_FREQ)
 else
-	ESPTOOL_WRITEFLASH_OPTS := $(ESPTOOL_FLASH_OPTS)
+	ESPTOOL_WRITEFLASH_OPTS := -fs $(FLASH_SIZE) -fm dio -ff $(FLASH_FREQ)
 endif
 
 ifdef ESPTOOL_BINDIR
@@ -77,7 +76,6 @@ define POSTBUILD
 	$(Q) if ! esptool.py version 1>/dev/null 2>&1; then \
 		echo ""; \
 		echo "esptool.py not found.  Please run: \"pip install esptool\""; \
-		echo "Or run: \"make -C $(TOPDIR)/tools/esp32c3\" to install all IDF tools."; \
 		echo ""; \
 		echo "Run make again to create the nuttx.bin image."; \
 		exit 1; \

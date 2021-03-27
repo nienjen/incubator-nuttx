@@ -33,6 +33,10 @@
 
 #include "rp2040_pico.h"
 
+#ifdef CONFIG_VIDEO_FB
+#  include <nuttx/video/fb.h>
+#endif
+
 /****************************************************************************
  * Public Functions
  ****************************************************************************/
@@ -99,6 +103,34 @@ int rp2040_bringup(void)
   if (ret < 0)
     {
       serr("ERROR: Failed to mount procfs at %s: %d\n", "/proc", ret);
+    }
+#endif
+
+#ifdef CONFIG_SENSORS_BMP180
+  /* Try to register BMP180 device in I2C0 */
+
+  ret = board_bmp180_initialize(0);
+  if (ret < 0)
+    {
+      syslog(LOG_ERR, "Failed to initialize BMP180 driver: %d\n", ret);
+    }
+#endif
+
+#ifdef CONFIG_SENSORS_INA219
+  /* Configure and initialize the INA219 sensor in I2C0 */
+
+  ret = board_ina219_initialize(0);
+  if (ret < 0)
+    {
+      syslog(LOG_ERR, "ERROR: rp2040_ina219_initialize() failed: %d\n", ret);
+    }
+#endif
+
+#ifdef CONFIG_VIDEO_FB
+  ret = fb_register(0, 0);
+  if (ret < 0)
+    {
+      _err("ERROR: Failed to initialize Frame Buffer Driver.\n");
     }
 #endif
 

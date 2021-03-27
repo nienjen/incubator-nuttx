@@ -1,5 +1,5 @@
 /****************************************************************************
- * libs/libc/machine/arm/armv-7a/arm_elf.c
+ * libs/libc/machine/arm/armv7-a/arch_elf.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -102,7 +102,7 @@ bool up_checkarch(FAR const Elf32_Ehdr *ehdr)
  * Name: up_relocate and up_relocateadd
  *
  * Description:
- *   Perform on architecture-specific ELF relocation.  Every architecture
+ *   Perform an architecture-specific ELF relocation.  Every architecture
  *   that uses the ELF loader must provide this function.
  *
  * Input Parameters:

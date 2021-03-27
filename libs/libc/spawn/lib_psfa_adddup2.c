@@ -1,5 +1,5 @@
 /****************************************************************************
- * libs/libc/string/lib_psfa_adddup2.c
+ * libs/libc/spawn/lib_psfa_adddup2.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -65,9 +65,7 @@ int posix_spawn_file_actions_adddup2(
 {
   FAR struct spawn_dup2_file_action_s *entry;
 
-  DEBUGASSERT(file_actions &&
-              fd1 >= 0 && fd1 < CONFIG_NFILE_DESCRIPTORS &&
-              fd2 >= 0 && fd2 < CONFIG_NFILE_DESCRIPTORS);
+  DEBUGASSERT(file_actions && fd1 >= 0 && fd2 >= 0);
 
   /* Allocate the action list entry */
 
